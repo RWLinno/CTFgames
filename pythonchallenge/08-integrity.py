@@ -1,0 +1,22 @@
+'''
+打开F12发现两串信息:
+<!--
+un: 'BZh91AY&SYA\xaf\x82\r\x00\x00\x01\x01\x80\x02\xc0\x02\x00 \x00!\x9ah3M\x07<]\xc9\x14\xe1BA\x06\xbe\x084'
+pw: 'BZh91AY&SY\x94$|\x0e\x00\x00\x00\x81\x00\x03$ \x00!\x9ah3M\x13<]\xc9\x14\xe1BBP\x91\xf08'
+-->
+以及../return/good.html 这个链接，需要登陆，线索很明显了
+'''
+# 一开始我用utf-8解不出密码来，搜了一下发现是bz2编码
+import bz2
+
+un = b'BZh91AY&SYA\xaf\x82\r\x00\x00\x01\x01\x80\x02\xc0\x02\x00 \x00!\x9ah3M\x07<]\xc9\x14\xe1BA\x06\xbe\x084'
+pw = b'BZh91AY&SY\x94$|\x0e\x00\x00\x00\x81\x00\x03$ \x00!\x9ah3M\x13<]\xc9\x14\xe1BBP\x91\xf08'
+
+print(bz2.decompress(un)) # !h3M<]BA4
+print(bz2.decompress(pw)) # $|$ !h3M<]BBP8
+
+'''
+username = huge
+password = file
+'''
+# 跳转到了下一关 http://www.pythonchallenge.com/pc/return/good.html
