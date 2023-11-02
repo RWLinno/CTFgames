@@ -1,3 +1,7 @@
+# 打开F12 发现第一条提示即 first + first
+
+import matplotlib.pyplot as plt
+
 first=[
 146,399,163,403,170,393,169,391,166,386,170,381,170,371,170,355,169,346,167,335,170,329,170,320,170,
 310,171,301,173,290,178,289,182,287,188,286,190,286,192,291,194,296,195,305,194,307,191,312,190,316,
@@ -25,8 +29,36 @@ second = [
 77,155,81,148,87,140,96,138,105,141,110,136,111,126,113,129,118,117,128,114,137,115,146,114,155,115,
 158,121,157,128,156,134,157,136,156,136]
 
-third = first+second
-print(third)
+print(first+second) #然而怎么可能是直接加起来,题目叫connect the dots，我们转换来两个点集
 
-for i in third:
-    print(chr(i),end="")
+def change2dots(p):
+    res = []
+    lst = None
+    for i in p:
+        if lst == None:
+            lst = i
+        else:
+            res.append((lst,i))
+            lst = None
+    print(res)
+    return res
+
+third = change2dots(first+second)
+
+def plot_points(points):
+    x = [point[0] for point in points]
+    y = [point[1] for point in points]
+    
+    plt.scatter(x, y)
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Plot of Points')
+    plt.grid(True)
+    plt.show()
+
+plot_points(third)
+
+# 画出来的东西第一眼不知道是啥……
+# 然而看了很久终于发现是头牛了，我们试试答案cow,得到信息 "hmm. it's a male."
+# 好吧，公牛，应该是ox了……结果也不是。查了一下公牛的单词，是bull
+# 答案：http://www.pythonchallenge.com/pc/return/bull.html
